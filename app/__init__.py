@@ -18,14 +18,17 @@ def create_app():
     jwt.init_app(app)
     CORS(app)
     
-    # Ruta raíz
-    @app.route('/')
-    def index():
-        return jsonify({"message": "Bienvenido al backend de la API"}), 200    
-
     # Registro de Blueprints - Registro de rutas
     from app.routes import auth_routes, service_routes
     app.register_blueprint(auth_routes, url_prefix='/api/auth')
     app.register_blueprint(service_routes, url_prefix='/api/services')
+
+    # Ruta raíz
+    @app.route('/')
+    def index():
+        return jsonify({"message": "Bienvenido al backend de la API"}), 200    
+    
+    with app.app_context():
+        db.create_all()
 
     return app
