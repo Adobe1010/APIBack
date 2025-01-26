@@ -18,7 +18,7 @@ def register():
     db.session.commit()
     return jsonify({"message": "Usuario registrado con éxito"}), 201
 
-def login():
+def login(): #no esta siendo usado
     data = request.get_json()
     email = data.get('email')
     password = data.get('password')

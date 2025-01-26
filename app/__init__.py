@@ -11,12 +11,13 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object('config.Config')  # Importa configuración desde config.py
     CORS(app, resources={r"/*": {"origins": "http://localhost:4200"}})  # Permite solicitudes desde cualquier origen (puedes restringirlo según necesidad)
+    
 #Reemplaza "http://localhost:4200" con el dominio de producción cuando estés listo
 
     # Inicialización de extensiones
     db.init_app(app)
     jwt.init_app(app)
-    CORS(app)
+    #CORS(app)
     
     # Registro de Blueprints - Registro de rutas
     from app.routes import auth_routes, service_routes
